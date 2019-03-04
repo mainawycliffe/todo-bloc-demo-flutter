@@ -18,15 +18,13 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     TodoEvent event,
   ) async* {
     if (event is TodoFetch) {
-      // add todo
-      // yield TodoAdd(todo: event.todo);
       final List<String> _todoList = todoRepository.getTodoList();
       yield TodoLoaded(todos: _todoList);
     } else if (event is TodoAdd) {
-      todoRepository.addTodo(event.todo);
-      final List<String> _todoList = todoRepository.getTodoList();
-      yield TodoEmpty();
+      final List<String> _todoList = List.from(todoRepository.getTodoList())
+        ..add(event.todo);
       yield TodoLoaded(todos: _todoList);
+      todoRepository.addTodo(event.todo);
     } else {
       yield TodoEmpty();
     }
