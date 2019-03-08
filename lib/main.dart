@@ -16,7 +16,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: myCustomTheme(),
       home: Todo(),
+    );
+  }
+
+  ThemeData myCustomTheme() {
+    final ThemeData _appTheme = ThemeData.light();
+
+    return _appTheme.copyWith(
+      primaryColor: Colors.orange,
+      accentColor: Colors.blue,
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+      buttonTheme: ButtonThemeData(
+        shape: OutlineInputBorder(
+          borderSide: BorderSide(
+            style: BorderStyle.none,
+          ),
+          borderRadius: BorderRadius.all(
+            const Radius.circular(15),
+          ),
+        ),
+        textTheme: ButtonTextTheme.primary,
+      ),
     );
   }
 }
