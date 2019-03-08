@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_bloc_demo_flutter/_todo.dart';
 import 'package:todo_bloc_demo_flutter/todo_add_event.dart';
 import 'package:todo_bloc_demo_flutter/todo_bloc.dart';
 import 'package:todo_bloc_demo_flutter/todo_state.dart';
@@ -29,8 +30,7 @@ class _TodoState extends State<Todo> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              _todoBloc.dispatch(TodoAdd(todo: DateTime.now().toString()));
-              // _todoBloc.dispatch(TodoFetch());
+              _showAddForm(context);
             },
           )
         ],
@@ -67,6 +67,12 @@ class _TodoState extends State<Todo> {
         ),
       ),
     );
+  }
+
+  _showAddForm(BuildContext context) async {
+    final results = await Navigator.pushNamed(context, '/add') as TodoItem;
+
+    if (results != null) _todoBloc.dispatch(TodoAdd(todo: results.todo));
   }
 
   @override
