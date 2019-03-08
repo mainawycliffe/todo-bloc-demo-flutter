@@ -10,6 +10,13 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   @override
   TodoState get initialState {
     final _todoList = todoRepository.getTodoList();
+
+    // if there are no todo, show empty todos
+    if (_todoList.length == 0) {
+      return TodoEmpty();
+    }
+
+    // show list of todos
     return TodoLoaded(todos: _todoList);
   }
 
@@ -20,7 +27,12 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   ) async* {
     if (event is TodoFetch) {
       final _todoList = todoRepository.getTodoList();
-      yield TodoLoaded(todos: _todoList);
+
+      // if there are no todo, show empty todos
+      if (_todoList.length == 0)
+        yield TodoEmpty();
+      else
+        yield TodoLoaded(todos: _todoList);
     } else if (event is TodoAdd) {
       final List<TodoItem> _todoList = List.from(todoRepository.getTodoList())
         ..add(event.todo);
