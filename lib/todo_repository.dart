@@ -1,16 +1,13 @@
-class TodoRepository {
-  List<String> _todoList = [
-    "Get some Milk",
-    "Buy Bread",
-    "Hire a Plumber",
-    "Something else ..."
-  ];
+import 'package:todo_bloc_demo_flutter/_todo.dart';
 
-  List<String> getTodoList() {
+class TodoRepository {
+  List<TodoItem> _todoList = [];
+
+  List<TodoItem> getTodoList() {
     return _todoList;
   }
 
-  void addTodo(String todo) {
+  void addTodo(TodoItem todo) {
     _todoList.add(todo);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
+import 'package:todo_bloc_demo_flutter/_todo.dart';
 
 abstract class TodoState extends Equatable {
   TodoState([List props = const []]) : super(props);
@@ -8,7 +9,7 @@ abstract class TodoState extends Equatable {
 class TodoEmpty extends TodoState {}
 
 class TodoLoaded extends TodoState {
-  final List<String> todos;
+  final List<TodoItem> todos;
 
   TodoLoaded({@required this.todos})
       : assert(todos != null),

@@ -48,12 +48,12 @@ class _TodoState extends State<Todo> {
               }
 
               if (todoState is TodoLoaded) {
-                List<String> todos = todoState.todos;
+                List<TodoItem> todos = todoState.todos;
 
                 List<Widget> widgets = todos
                     .map(
                       (name) => new ListTile(
-                            title: Text(name),
+                            title: Text(name.todo),
                           ),
                     )
                     .toList();
@@ -72,7 +72,7 @@ class _TodoState extends State<Todo> {
   _showAddForm(BuildContext context) async {
     final results = await Navigator.pushNamed(context, '/add') as TodoItem;
 
-    if (results != null) _todoBloc.dispatch(TodoAdd(todo: results.todo));
+    if (results != null) _todoBloc.dispatch(TodoAdd(todo: results));
   }
 
   @override
