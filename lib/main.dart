@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_bloc_demo_flutter/add_todo.dart';
 import 'package:todo_bloc_demo_flutter/todo.dart';
 import 'package:todo_bloc_demo_flutter/todo_add_event.dart';
-import 'package:todo_bloc_demo_flutter/todo_repository.dart';
 
 void main() {
   BlocSupervisor().delegate = SimpleBlocDelegate();
@@ -16,9 +16,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: _routes(),
       theme: myCustomTheme(),
       home: Todo(),
     );
+  }
+
+  Map<String, WidgetBuilder> _routes() {
+    return {'/add': (context) => AddTodo()};
   }
 
   ThemeData myCustomTheme() {
